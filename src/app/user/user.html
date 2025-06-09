@@ -33,8 +33,20 @@
   </div>
 </div>
 
+  <!-- Loader -->
+<!-- <div *ngIf="isLoading" class="table-loader">
+  <i class="fas fa-spinner fa-spin"></i> Loading users...
+</div> -->
+
+
 <!-- Table -->
 <table border="1">
+
+   <tr *ngIf="isLoading">
+      <td colspan="4" class="table-loader">
+        <i class="fas fa-spinner fa-spin"></i> Loading users...
+      </td>
+    </tr>
   <thead>
     <tr>
       <th>ID</th>
@@ -67,6 +79,7 @@
   </button>
 
   <button
+  
     *ngFor="let page of pages"
     [class.active]="page === currentPage"
     (click)="changePage(page)"

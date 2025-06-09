@@ -187,6 +187,13 @@ tbody tr:hover {
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
 }
 
+.table-loader {
+  text-align: center;
+  color: #5e95d9;
+  font-weight: 600;
+  padding: 20px;
+  font-size: 18px;
+}
 
 
 @media (max-width: 1024px) {

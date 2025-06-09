@@ -24,21 +24,39 @@ export class UserComponent {
   isDownloading = false;
   searchQuery: string = '';
   originalUsers: any[] = [];
+  isLoading:Boolean = true
 
   // Load users when page reload
   ngOnInit() {
     this.loadUsers(this.currentPage);
   }
   loadUsers(page: number) {
+        this.isLoading = true
+
     this.currentPage = page;
-    this.userService
-      .getUsers(page, this.limit, this.selectedDate)
-      .subscribe((data: any) => {
-        this.originalUsers = data.users;
-        this.users = data.users;
-        this.totalPages = data.totalPages;
+    // this.userService
+    //   .getUsers(page, this.limit, this.selectedDate)
+    //   .subscribe((data: any) => {
+    //     this.originalUsers = data.users;
+    //     this.users = data.users;
+    //     this.totalPages = data.totalPages;
+    //     this.noUsersFound = this.users.length === 0;
+    //   });
+
+    this.userService.getUsers(page, this.limit, this.selectedDate).subscribe({
+    next: (res) => {
+      this.originalUsers = res.users;
+        this.users = res.users;
+        this.totalPages = res.totalPages;
         this.noUsersFound = this.users.length === 0;
-      });
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Error fetching users by date:', err);
+      this.noUsersFound = true;
+      this.isLoading = false;
+    }
+  });
   }
 
   // Displaying pages into the UI
