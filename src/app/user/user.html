@@ -1,9 +1,24 @@
 <!-- Filter Section -->
 <div class="date-filter">
   <div class="filter_cont">
-    <label for="dateFilter">Filter by Date:</label>
+    <label for="dateFilter">
+      <i class="fas fa-calendar-alt"></i> Filter by Date:
+    </label>
     <input type="date" id="dateFilter" [(ngModel)]="selectedDate" />
-    <button (click)="filterByDate()">Filter</button>
+
+    <button class="filter-btn" (click)="filterByDate()">
+      <i class="fas fa-filter"></i> Filter
+    </button>
+  </div>
+  <div class="search-wrapper">
+    <i class="fas fa-search search-icon"></i>
+    <input
+      type="text"
+      placeholder="Search by name or email"
+      [(ngModel)]="searchQuery"
+      (input)="searchUsers()"
+      class="search-input"
+    />
   </div>
 
   <div class="download_container">
@@ -12,11 +27,11 @@
       [disabled]="isDownloading"
       (click)="downloadExcel()"
     >
+      <i class="fas fa-download"></i>
       {{ isDownloading ? 'Downloading...' : 'Download Excel' }}
     </button>
   </div>
 </div>
-
 
 <!-- Table -->
 <table border="1">
@@ -25,28 +40,29 @@
       <th>ID</th>
       <th>Name</th>
       <th>Email</th>
+      <th>Date</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody [@tableAnimation]>
     <tr *ngFor="let user of users">
       <td>{{ user._id }}</td>
       <td>{{ user.name }}</td>
       <td>{{ user.email }}</td>
+      <td>{{ user.createdAt | date: 'MMM d, y, h:mm a' }}</td>
     </tr>
   </tbody>
 </table>
 
-
 <!-- Displaying error if user array is empty -->
-<p *ngIf="noUsersFound" class="no-users-msg">
-  No users found for the selected date.
-</p>
-
-
+<p *ngIf="noUsersFound" class="no-users-msg">No users found</p>
 
 <!-- Pagination -->
 <div class="pagination">
-  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+  <button
+    *ngIf="!noUsersFound"
+    (click)="changePage(currentPage - 1)"
+    [disabled]="currentPage === 1"
+  >
     Prev
   </button>
 
@@ -60,6 +76,7 @@
   </button>
 
   <button
+    *ngIf="!noUsersFound"
     (click)="changePage(currentPage + 1)"
     [disabled]="currentPage === totalPages"
   >

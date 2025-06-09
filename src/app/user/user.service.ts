@@ -15,4 +15,9 @@ export class UserService {
     console.log("apiUrl : " , apiUrl)
     return this.http.get<any>(apiUrl);
   }
+
+  downloadUsersExcel(date: string) {
+    const url = `/user/download-users${date ? '?date=' + date : ''}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 }
