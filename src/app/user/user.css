@@ -105,7 +105,7 @@ tbody tr:hover {
   text-align: center;
 }
 .download-btn {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   color: white;
   padding: 12px 20px;
   border: none;
@@ -126,7 +126,4 @@ tbody tr:hover {
   background-color: #ccc;
   cursor: not-allowed;
   transform: none;
-}
-.download_container{
-
 }

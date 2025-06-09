@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { FormsModule } from '@angular/forms';
-import * as XLSX from 'xlsx';
-import * as FileSaver from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,8 +12,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./user.css'],
 })
 export class UserComponent {
-    constructor(private http: HttpClient, private userService: UserService) {}
-
+  constructor(private http: HttpClient, private userService: UserService) {}
 
   users: any[] = [];
   currentPage = 1;
@@ -43,19 +40,17 @@ export class UserComponent {
     const pages: number[] = [];
 
     if (this.totalPages <= 5) {
-      // Show all pages if less or equal to 5
       for (let i = 1; i <= this.totalPages; i++) {
         pages.push(i);
       }
     } else {
-      // Always show first page
       pages.push(1);
 
       let startPage = Math.max(this.currentPage - 1, 2);
       let endPage = Math.min(this.currentPage + 1, this.totalPages - 1);
 
       if (startPage > 2) {
-        pages.push(-1); // -1 means "..." ellipsis
+        pages.push(-1);
       }
 
       for (let i = startPage; i <= endPage; i++) {
@@ -63,10 +58,9 @@ export class UserComponent {
       }
 
       if (endPage < this.totalPages - 1) {
-        pages.push(-1); // "..." ellipsis
+        pages.push(-1);
       }
 
-      // Always show last page
       pages.push(this.totalPages);
     }
 
