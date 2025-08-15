@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <h2>Todo (Realtime)</h2>
+
+  <input type="text" placeholder="Enter Something" [(ngModel)] = 'inputText' />
+   <button onclick="addTodo()">Add Todo</button>
+ 
+   <div >
+      <h1 *ngFor="let item of todosData">{{item.title}}</h1>
+   </div>
+</div>

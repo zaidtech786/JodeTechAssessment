@@ -34,14 +34,7 @@ export class UserComponent {
         this.isLoading = true
 
     this.currentPage = page;
-    // this.userService
-    //   .getUsers(page, this.limit, this.selectedDate)
-    //   .subscribe((data: any) => {
-    //     this.originalUsers = data.users;
-    //     this.users = data.users;
-    //     this.totalPages = data.totalPages;
-    //     this.noUsersFound = this.users.length === 0;
-    //   });
+    
 
     this.userService.getUsers(page, this.limit, this.selectedDate).subscribe({
     next: (res) => {
